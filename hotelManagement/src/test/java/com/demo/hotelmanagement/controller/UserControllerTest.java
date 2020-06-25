@@ -1,6 +1,5 @@
 package com.demo.hotelmanagement.controller;
 
-import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -18,7 +17,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.demo.hotelmanagement.dto.LoginDto;
-import com.demo.hotelmanagement.exception.ResourceNotFoundException;
 import com.demo.hotelmanagement.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

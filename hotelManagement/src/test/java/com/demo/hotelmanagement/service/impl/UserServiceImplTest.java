@@ -1,6 +1,6 @@
-
 package com.demo.hotelmanagement.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -16,8 +16,7 @@ import com.demo.hotelmanagement.dao.UserDao;
 import com.demo.hotelmanagement.dto.UserDto;
 import com.demo.hotelmanagement.model.User;
 
-import junit.framework.Assert;
-@SuppressWarnings("deprecation")
+
 @ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
 
@@ -63,7 +62,7 @@ public class UserServiceImplTest {
 		when(userDao.findByUserNameAndPassword("test", "test")).thenReturn(user);
 		userServiceImpl.authenticateUser("test", "test");
 		verify(userDao).findByUserNameAndPassword("test", "test");
-		Assert.assertEquals(userServiceImpl.authenticateUser("test", "test"),true);
+		assertEquals(userServiceImpl.authenticateUser("test", "test"),true);
 		
 	}
 	
@@ -80,7 +79,7 @@ public class UserServiceImplTest {
 		when(userDao.findByUserNameAndPassword("test", "test")).thenReturn(null);
 		userServiceImpl.authenticateUser("test", "test");
 		verify(userDao).findByUserNameAndPassword("test", "test");
-		Assert.assertEquals(userServiceImpl.authenticateUser("test", "test"),false);
+		assertEquals(userServiceImpl.authenticateUser("test", "test"),false);
 		
 	}
 	

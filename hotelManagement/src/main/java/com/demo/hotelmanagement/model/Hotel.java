@@ -21,4 +21,40 @@ public class Hotel {
 	String address;
 	String contactNumber;
 	int roomsAvailable;
+	public Long getHotelId() {
+		return hotelId;
+	}
+	public void setHotelId(Long hotelId) {
+		this.hotelId = hotelId;
+	}
+	public String getHotelName() {
+		return hotelName;
+	}
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getContactNumber() {
+		return contactNumber;
+	}
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+	public int getRoomsAvailable() {
+		return roomsAvailable;
+	}
+	public void setRoomsAvailable(int roomsAvailable) {
+		this.roomsAvailable = roomsAvailable;
+	}
 }

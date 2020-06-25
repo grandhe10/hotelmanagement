@@ -21,7 +21,7 @@ public class SwaggerConfig {
 				.apis(RequestHandlerSelectors.any())
 				.paths(Predicates.not(PathSelectors.regex("/error.*")))
 				.build();
-	
+		
 	}
 
 }

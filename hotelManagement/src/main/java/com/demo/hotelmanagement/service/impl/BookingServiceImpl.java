@@ -28,7 +28,6 @@ import com.demo.hotelmanagement.model.Hotel;
 import com.demo.hotelmanagement.model.PriceDetails;
 import com.demo.hotelmanagement.model.RoomOptions;
 import com.demo.hotelmanagement.model.RoomType;
-import com.demo.hotelmanagement.model.User;
 import com.demo.hotelmanagement.service.BookingService;
 
 @Service
@@ -74,9 +73,8 @@ public class BookingServiceImpl implements BookingService {
 
 	private Boolean validateUserIdAndRoomId(BookingRequestDto bookingRequestDto,Long roomOptionId) {
 
-		Optional<RoomOptions> roomOptional = roomOptionsDao.findByRoomOptionId(roomOptionId);
-		Optional<User> userOptional = userDao.findByUserId(bookingRequestDto.getUserId());
-		if (!roomOptional.isPresent() || (!userOptional.isPresent()))
+		
+		if (!(roomOptionsDao.findByRoomOptionId(roomOptionId)).isPresent() || (!(userDao.findByUserId(bookingRequestDto.getUserId()).isPresent())))
 			return false;
 
 		return true;

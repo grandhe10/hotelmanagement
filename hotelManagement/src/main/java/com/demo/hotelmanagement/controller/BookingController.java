@@ -35,7 +35,7 @@ public class BookingController {
 	public ResponseEntity<RoomDetailDto> getCustomHotelDetails(@Valid @RequestBody BookingDetailsRequestDto bookingDetailsRequestDto)
 	{
 		
-		return new ResponseEntity<RoomDetailDto>(bookingService.getCustomeHotelDetails(bookingDetailsRequestDto),HttpStatus.OK);
+		return new ResponseEntity<>(bookingService.getCustomeHotelDetails(bookingDetailsRequestDto),HttpStatus.OK);
 		
 		
 	}

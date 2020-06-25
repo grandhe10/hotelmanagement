@@ -62,7 +62,7 @@ public class UserServiceImplTest {
 		when(userDao.findByUserNameAndPassword("test", "test")).thenReturn(user);
 		userServiceImpl.authenticateUser("test", "test");
 		verify(userDao).findByUserNameAndPassword("test", "test");
-		assertEquals(userServiceImpl.authenticateUser("test", "test"),true);
+		assertEquals(true,userServiceImpl.authenticateUser("test", "test"));
 		
 	}
 	
@@ -79,7 +79,7 @@ public class UserServiceImplTest {
 		when(userDao.findByUserNameAndPassword("test", "test")).thenReturn(null);
 		userServiceImpl.authenticateUser("test", "test");
 		verify(userDao).findByUserNameAndPassword("test", "test");
-		assertEquals(userServiceImpl.authenticateUser("test", "test"),false);
+		assertEquals(false,userServiceImpl.authenticateUser("test", "test"));
 		
 	}
 	

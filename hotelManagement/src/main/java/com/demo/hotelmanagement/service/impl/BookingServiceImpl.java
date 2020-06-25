@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.demo.hotelmanagement.constants.ApplicationConstants;
 import com.demo.hotelmanagement.dao.BookingDao;
 import com.demo.hotelmanagement.dao.GuestDao;
 import com.demo.hotelmanagement.dao.HotelDao;
@@ -178,13 +179,13 @@ public class BookingServiceImpl implements BookingService {
 			return roomDetailsDto;
 		Optional<PriceDetails> priceDetails = priceDetailsDao.findByRoomOptionIdAndRoomType(roomOptions.get().getRoomOptionId(), RoomType.VILLA);
 		if(!priceDetails.isPresent())
-			return new RoomDetailDto("No rooms available");
+			return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
 		
 		roomDetailsDto.setAvailable(roomOptions.get().getFamilyRoom());
 		roomDetailsDto.setPrice(priceDetails.get().getPrice());
 		roomDetailsDto.setRoomType(RoomType.VILLA);
 		roomDetailsDto.setHotelName(hotelOptional.get().getHotelName());
-		roomDetailsDto.setMessage("Please find the above room details");
+		roomDetailsDto.setMessage(ApplicationConstants.ROOM_DETAILS);
 		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomId());
 		return roomDetailsDto;
 		
@@ -202,14 +203,14 @@ public class BookingServiceImpl implements BookingService {
 			return roomDetailsDto;
 		Optional<PriceDetails> priceDetails = priceDetailsDao.findByRoomOptionIdAndRoomType(roomOptions.get().getRoomOptionId(), RoomType.DOUBLE);
 		if(!priceDetails.isPresent())
-			return new RoomDetailDto("No rooms available");
+			return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
 		
 		roomDetailsDto.setAvailable(roomOptions.get().getFamilyRoom());
 		roomDetailsDto.setPrice(priceDetails.get().getPrice());
 		roomDetailsDto.setRoomType(RoomType.DOUBLE);
 		roomDetailsDto.setHotelName(hotelOptional.get().getHotelName());
 		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomId());
-		roomDetailsDto.setMessage("Please find the above room details");;
+		roomDetailsDto.setMessage(ApplicationConstants.ROOM_DETAILS);
 		return roomDetailsDto;
 		
 	}	
@@ -226,14 +227,14 @@ public class BookingServiceImpl implements BookingService {
 			return roomDetailsDto;
 		Optional<PriceDetails> priceDetails = priceDetailsDao.findByRoomOptionIdAndRoomType(roomOptions.get().getRoomOptionId(), RoomType.SINGLE);
 		if(!priceDetails.isPresent())
-			return new RoomDetailDto("No rooms available");
+			return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
 		
 		roomDetailsDto.setAvailable(roomOptions.get().getFamilyRoom());
 		roomDetailsDto.setPrice(priceDetails.get().getPrice());
 		roomDetailsDto.setRoomType(RoomType.SINGLE);
 		roomDetailsDto.setHotelName(hotelOptional.get().getHotelName());
 		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomId());
-		roomDetailsDto.setMessage("Please find the above room details");;
+		roomDetailsDto.setMessage(ApplicationConstants.ROOM_DETAILS);
 		return roomDetailsDto;
 		
 	}
@@ -251,14 +252,14 @@ public class BookingServiceImpl implements BookingService {
 			return roomDetailsDto;
 		Optional<PriceDetails> priceDetails = priceDetailsDao.findByRoomOptionIdAndRoomType(roomOptions.get().getRoomOptionId(), RoomType.TRIPLE);
 		if(!priceDetails.isPresent())
-			return new RoomDetailDto("No rooms available");
+			return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
 		
 		roomDetailsDto.setAvailable(roomOptions.get().getFamilyRoom());
 		roomDetailsDto.setPrice(priceDetails.get().getPrice());
 		roomDetailsDto.setRoomType(RoomType.TRIPLE);
 		roomDetailsDto.setHotelName(hotelOptional.get().getHotelName());
 		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomId());
-		roomDetailsDto.setMessage("Please find the above room details");;
+		roomDetailsDto.setMessage(ApplicationConstants.ROOM_DETAILS);
 		return roomDetailsDto;
 		
 	}
@@ -275,18 +276,18 @@ public class BookingServiceImpl implements BookingService {
 			return roomDetailsDto;
 		Optional<PriceDetails> priceDetails = priceDetailsDao.findByRoomOptionIdAndRoomType(roomOptions.get().getRoomOptionId(), RoomType.FAMILY);
 		if(!priceDetails.isPresent())
-			return new RoomDetailDto("No rooms available");
+			return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
 		
 		roomDetailsDto.setAvailable(roomOptions.get().getFamilyRoom());
 		roomDetailsDto.setPrice(priceDetails.get().getPrice());
 		roomDetailsDto.setRoomType(RoomType.FAMILY);
 		roomDetailsDto.setHotelName(hotelOptional.get().getHotelName());
 		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomId());
-		roomDetailsDto.setMessage("Please find the above room details");;
+		roomDetailsDto.setMessage(ApplicationConstants.ROOM_DETAILS);
 		return roomDetailsDto;
 		
 	}
 	else
-		return new RoomDetailDto("No rooms available ");
+		return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
 	}
 }

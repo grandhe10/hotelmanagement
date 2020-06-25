@@ -35,8 +35,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean authenticateUser(String userName, String password)  {
-        User user = userDao.findByUserNameAndPassword(userName,password);
-        if (user != null)
+      
+        if (userDao.findByUserNameAndPassword(userName,password)!= null)
             return true;
         return false;
     }

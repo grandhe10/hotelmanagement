@@ -21,8 +21,6 @@ import junit.framework.Assert;
 @ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
 
-	
-
 	@Mock
 	UserDao userDao;
 
@@ -51,13 +49,10 @@ public class UserServiceImplTest {
 		userServiceImpl.addUser(userDto);
 		//then
 		verify(userDao).save(any(User.class));
-		
-
 	}
 
 	
-	@Test
-	
+	@Test	
 	public void authenticateTest()  {
 		User user = new User();
 		user.setUserName("test");

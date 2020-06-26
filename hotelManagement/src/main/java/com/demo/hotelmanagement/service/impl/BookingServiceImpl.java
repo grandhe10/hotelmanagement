@@ -78,7 +78,8 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	private Boolean validateUserIdAndRoomId(BookingRequestDto bookingRequestDto,Long roomOptionId) {
-			
+		
+		
 		
 		if (!(roomOptionsDao.findByRoomOptionId(roomOptionId)).isPresent() || (!(userDao.findByUserId(bookingRequestDto.getUserId()).isPresent())))
 			return false;
@@ -100,9 +101,12 @@ public class BookingServiceImpl implements BookingService {
 		booking.setRoomId(roomOptionId);
 		bookingDao.save(booking);
 
-		Optional<RoomOptions> roomOptional = roomOptionsDao.findByRoomOptionId(roomOptionId);
 		
-		if (!roomOptional.isPresent())
+		
+		Optional<RoomOptions> roomOptional = roomOptionsDao.findByRoomOptionIdAndAvailableDate(roomOptionId, LocalDate.parse(bookingRequestDto.getDate()));
+		
+		
+		if (!roomOptional.isPresent() )
 			return new BookingRequestDto("Please verify room details");
 		
 		Optional<Hotel> hotelOptional = hotelDao.findByHotelId(roomOptional.get().getHotelId());

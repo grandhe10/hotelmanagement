@@ -29,6 +29,9 @@ public interface RoomOptionsDao extends CrudRepository<RoomOptions, Long>{
 	 * @return roomoptions based on guests
 	 */
 	Optional<RoomOptions> findByHotelIdAndAvailableDate(Long hotelId, LocalDate availableDate);
+	
+	
+	Optional<RoomOptions> findByRoomOptionIdAndAvailableDate(Long roomOptionId, LocalDate availableDate);
 
 	
 	

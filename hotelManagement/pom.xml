@@ -22,7 +22,7 @@
             **/model/*,
             **/configuration/*,
             **/constants/*,
-            **/exception/*
+            **/exception/*,
             **/dao/*
         </sonar.coverage.exclusions>
 

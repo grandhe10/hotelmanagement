@@ -5,7 +5,6 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,9 +23,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.demo.hotelmanagement.dto.BookingDetailsRequestDto;
 import com.demo.hotelmanagement.dto.BookingRequestDto;
 import com.demo.hotelmanagement.dto.GuestRequestDto;
 import com.demo.hotelmanagement.dto.ResponseDto;
+import com.demo.hotelmanagement.dto.RoomDetailDto;
+import com.demo.hotelmanagement.model.RoomType;
 import com.demo.hotelmanagement.service.BookingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -55,14 +56,11 @@ public class BookingControllerTest {
 	{
 		objectMapper = new ObjectMapper();
 		mockMvc = MockMvcBuilders.standaloneSetup(bookingController).build();
-		
-		
-		
-		
+	
 	}
 
 	@Test
-		public void login() throws Exception { 
+		public void bookRoom() throws Exception { 
 		List<BookingRequestDto> bookingRequestDtoList = new ArrayList<>();
 		
 		bookingRequestDto = new BookingRequestDto();
@@ -92,6 +90,30 @@ public class BookingControllerTest {
 	  .andExpect(status().isOk()) 
 	  .andExpect(jsonPath("$", Matchers.any(LinkedHashMap.class)));
 	  verify(bookingService).bookRoom(any(List.class),  eq("SINGLE"), eq(1L)); }
-
 }
+
+/*
+ * @Test public void getCustomHotelDetails() throws Exception {
+ * BookingDetailsRequestDto bookingDetailsRequestDto = new
+ * BookingDetailsRequestDto(); bookingDetailsRequestDto.setGuests(20);
+ * bookingDetailsRequestDto.setHotelId(1L);
+ * bookingDetailsRequestDto.setRoomsRequired(5); RoomDetailDto roomDetailDto =
+ * new RoomDetailDto(); roomDetailDto.setAvailable(200);
+ * roomDetailDto.setHotelName("testHotelName");
+ * roomDetailDto.setMessage("Please find details here");
+ * roomDetailDto.setPrice(2000); roomDetailDto.setRoomOptionId(1L);
+ * roomDetailDto.setRoomType(RoomType.VILLA);
+ * 
+ * when(bookingService.getCustomeHotelDetails(any(BookingDetailsRequestDto.class
+ * ))).thenReturn(any(RoomDetailDto.class));
+ * 
+ * mockMvc.perform(post("/hotels").contentType(
+ * MediaType.APPLICATION_JSON_VALUE) .param("roomType","SINGLE")
+ * .content(objectMapper.writeValueAsString(bookingDetailsRequestDto)))
+ * .andExpect(status().isNotFound()) .andExpect(jsonPath("$",
+ * Matchers.any(RoomDetailDto.class)));
+ * verify(bookingService).getCustomeHotelDetails(any(BookingDetailsRequestDto.
+ * class)); } }
+ */
+	
 	

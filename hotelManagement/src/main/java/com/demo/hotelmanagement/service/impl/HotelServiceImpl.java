@@ -15,45 +15,48 @@ import com.demo.hotelmanagement.dto.HotelResponseDto;
 import com.demo.hotelmanagement.model.Hotel;
 import com.demo.hotelmanagement.model.RoomOptions;
 import com.demo.hotelmanagement.service.HotelService;
+
 @Service
-public class HotelServiceImpl implements HotelService{
+public class HotelServiceImpl implements HotelService {
 
 	@Autowired
 	HotelDao hotelDao;
-	
+
 	@Autowired
 	RoomOptionsDao roomOptionsDao;
+
 	@Override
 	public HotelResponseDto getHotelsByLocation(String location, String availableDate) {
 		HotelResponseDto hotelResponseDto = new HotelResponseDto();
 		Optional<List<Hotel>> hotelList = hotelDao.findByLocationContains(location);
-		
-		if(!hotelList.isPresent())
-		return hotelResponseDto;
 
-		List<Long> hotelIdList = hotelList.get().stream().map(hotel-> hotel.getHotelId()).collect(Collectors.toList());
-		System.out.println(hotelIdList.get(0));
-		List<HotelDetailsDto> hotelDetailsDtoList = hotelIdList.stream().map(id->getHotelDetails(id,availableDate)).collect(Collectors.toList());
+		if (!hotelList.isPresent())
+			return hotelResponseDto;
 
-			 hotelResponseDto.setHotelDetailsDtoList(hotelDetailsDtoList);
-			 return hotelResponseDto;
+		List<Long> hotelIdList = hotelList.get().stream().map(hotel -> hotel.getHotelId()).collect(Collectors.toList());
 		
+		List<HotelDetailsDto> hotelDetailsDtoList = hotelIdList.stream().map(id -> getHotelDetails(id, availableDate))
+				.collect(Collectors.toList());
+
+		hotelResponseDto.setHotelDetailsDtoList(hotelDetailsDtoList);
+			return hotelResponseDto;
+
 	}
-	
-	private HotelDetailsDto getHotelDetails(Long hotelId,String availableDate)
-	{
+
+	private HotelDetailsDto getHotelDetails(Long hotelId, String availableDate) {
 
 		HotelDetailsDto hotelDetailsDto = new HotelDetailsDto();
 		Optional<Hotel> hotel = hotelDao.findByHotelId(hotelId);
-		if(!hotel.isPresent())
+		if (!hotel.isPresent())
 			return null;
-		Optional<RoomOptions> roomOptions = roomOptionsDao.findByHotelIdAndAvailableDate(hotelId, LocalDate.parse(availableDate));
-				if(!roomOptions.isPresent())
-					return null;
-				
-				Optional<Hotel> hotel1 = hotelDao.findByHotelId(roomOptions.get().getHotelId());
-				if(!hotel1.isPresent())
-					return null;
+		Optional<RoomOptions> roomOptions = roomOptionsDao.findByHotelIdAndAvailableDate(hotelId,
+				LocalDate.parse(availableDate));
+		if (!roomOptions.isPresent())
+			return null;
+
+		Optional<Hotel> hotel1 = hotelDao.findByHotelId(roomOptions.get().getHotelId());
+		if (!hotel1.isPresent())
+			return null;
 		hotelDetailsDto.setAddress(hotel1.get().getAddress());
 		hotelDetailsDto.setContactNumber(hotel1.get().getContactNumber());
 		hotelDetailsDto.setDoubleRoom(roomOptions.get().getDoubleRoom());
@@ -64,11 +67,8 @@ public class HotelServiceImpl implements HotelService{
 		hotelDetailsDto.setTripleRoom(roomOptions.get().getTripleRoom());
 		hotelDetailsDto.setVilla(roomOptions.get().getVilla());
 		hotelDetailsDto.setHotelId(hotel1.get().getHotelId());
-	return hotelDetailsDto;
-		
-		
-	}
+		return hotelDetailsDto;
 
-	
+	}
 
 }

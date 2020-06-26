@@ -72,7 +72,7 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	private Boolean validateUserIdAndRoomId(BookingRequestDto bookingRequestDto,Long roomOptionId) {
-
+			
 		
 		if (!(roomOptionsDao.findByRoomOptionId(roomOptionId)).isPresent() || (!(userDao.findByUserId(bookingRequestDto.getUserId()).isPresent())))
 			return false;

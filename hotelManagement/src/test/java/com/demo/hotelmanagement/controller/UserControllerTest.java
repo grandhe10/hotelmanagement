@@ -72,8 +72,6 @@ public class UserControllerTest {
 		userDto.setContactNumber("7364");
 		userDto.setAddress("testAddress");
 		
-		
-	
 			mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON_VALUE)
 					.content(objectMapper.writeValueAsString(userDto)))
 			        .andExpect(status().isOk())

@@ -92,27 +92,5 @@ public class BookingControllerTest {
 		verify(bookingService).bookRoom(any(List.class), eq("SINGLE"), eq(1L));
 	}
 
-	/*
-	 * @Test public void getCustomHotelDetails() throws Exception {
-	 * BookingDetailsRequestDto bookingDetailsRequestDto = new
-	 * BookingDetailsRequestDto(); bookingDetailsRequestDto.setGuests(20);
-	 * bookingDetailsRequestDto.setHotelId(1L);
-	 * bookingDetailsRequestDto.setRoomsRequired(5); RoomDetailDto roomDetailDto =
-	 * new RoomDetailDto(); roomDetailDto.setAvailable(200);
-	 * roomDetailDto.setHotelName("testHotelName");
-	 * roomDetailDto.setMessage("Please find details here");
-	 * roomDetailDto.setPrice(2000); roomDetailDto.setRoomOptionId(1L);
-	 * roomDetailDto.setRoomType(RoomType.VILLA);
-	 * 
-	 * when(bookingService.getCustomeHotelDetails(eq(bookingDetailsRequestDto)))
-	 * .thenReturn((roomDetailDto));
-	 * bookingService.getCustomeHotelDetails(bookingDetailsRequestDto);
-	 * mockMvc.perform(post("/hotels").contentType(MediaType.APPLICATION_JSON_VALUE)
-	 * .param("roomType", "SINGLE")
-	 * .content(objectMapper.writeValueAsString(bookingDetailsRequestDto))).
-	 * andExpect(status().isNotFound())
-	 * .andExpect(content().string(objectMapper.writeValueAsString(roomDetailDto)));
-	 * verify(bookingService).getCustomeHotelDetails(any(BookingDetailsRequestDto.
-	 * class)); }
-	 */
+	
 }

@@ -6,6 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -44,7 +47,7 @@ public class UserController {
 	 * @return logged in successfully
 	 */
     @PostMapping("/users/login")
-    public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto)  {
+    public ResponseEntity<String> authenticateUser(@Valid @RequestBody LoginDto loginDto)  {
     	logger.info("Inside login api");
        boolean  isExists=userService.authenticateUser(loginDto.getUserName(),loginDto.getPassword());
         if (isExists)

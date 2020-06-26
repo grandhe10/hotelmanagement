@@ -112,25 +112,7 @@ public class BookingServiceImplTest {
 		user.setContactNumber("7364");
 		user.setAddress("testAddress");
 		user.setUserId(1L);
-		/*
-		 * when(roomOptionsDao.findByRoomOptionId(1L)).thenReturn(Optional.of(
-		 * roomOptions));
-		 * 
-		 * when(userDao.findByUserId(1L)).thenReturn(Optional.of(user));
-		 * assertThat(!roomOptionsDao.findByRoomOptionId(1L).get().equals(null));
-		 * assertThat((!userDao.findByUserId(1L).get().equals(null)));
-		 * bookingDao.save(any(Booking.class)); guestDao.save(any(Guest.class));
-		 * when(bookingDao.save(booking)).thenReturn(any(Booking.class));
-		 * 
-		 * when(bookingServiceImpl.bookRoom(any(List.class), eq("SINGE"),
-		 * eq(1L))).thenReturn(responseDto);
-		 * 
-		 * when(guestDao.save(any(Guest.class))).thenReturn(any(Guest.class));
-		 * verify(guestDao).save(any(Guest.class));
-		 * 
-		 * when(bookingDao.save(booking)).thenReturn(any(Booking.class));
-		 * verify(bookingDao).save(any(Booking.class));
-		 */
+		
 	}
 
 }

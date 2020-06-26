@@ -16,15 +16,15 @@ public class BookingRequestDto {
 		super();
 		this.message = message;
 	}
-	  @NotNull
+	 
 	Long userId;
-	  @NotEmpty
+	 
 	String checkIn;
-	  @NotEmpty
+	  
 	String checkOut;
-	  @NotNull
+	
 	List<GuestRequestDto> guestRequestDtoList;
-	  @NotEmpty
+	 
 	String message;
 	@DateTimeFormat(pattern="yyyy-mm-dd")
 	String date;

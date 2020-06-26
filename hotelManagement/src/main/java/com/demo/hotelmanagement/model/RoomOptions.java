@@ -12,7 +12,6 @@ public class RoomOptions {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	Long roomOptionId;
-	Long roomId;
 	int familyRoom;
 	int singleRoom;
 	int doubleRoom;
@@ -20,12 +19,6 @@ public class RoomOptions {
 	int villa;
 	Long hotelId;
 	LocalDate availableDate;
-	public Long getRoomId() {
-		return roomId;
-	}
-	public void setRoomId(Long roomId) {
-		this.roomId = roomId;
-	}
 	public int getFamilyRoom() {
 		return familyRoom;
 	}

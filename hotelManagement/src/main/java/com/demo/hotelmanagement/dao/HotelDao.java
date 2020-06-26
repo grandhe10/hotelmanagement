@@ -11,7 +11,15 @@ import com.demo.hotelmanagement.model.Hotel;
 public interface HotelDao extends CrudRepository<Hotel, Long>{
 	Optional<Hotel> findByHotelId(Long hotelId);
 	
-	List<Optional<Hotel>> findAllByLocation(String location);
+	Optional<List<Hotel>> findAllByLocationContaining(String location);
+
+	Optional<List<Hotel>> findByLocation(String location);
+
+	Optional<List<Hotel>> findByLocationContains(String location);
+
+	//Optional<List<Hotel>> findByLocationContaining(String location);
+	
+	
 
 }
 

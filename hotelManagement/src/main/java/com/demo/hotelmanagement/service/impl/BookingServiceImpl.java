@@ -101,7 +101,7 @@ public class BookingServiceImpl implements BookingService {
 		Optional<Hotel> hotelOptional = hotelDao.findByHotelId(roomOptional.get().getHotelId());
 		if(!hotelOptional.isPresent())
 			return new BookingRequestDto("Please verify hotel details");
-		
+			
 		if(roomType.equalsIgnoreCase((RoomType.DOUBLE).toString()))
 		{
 			roomOptional.get().setDoubleRoom(roomOptional.get().getDoubleRoom()-1);
@@ -162,19 +162,20 @@ public class BookingServiceImpl implements BookingService {
 		if(bookingDetailsRequestDto.getGuests() >20)
 			return new  RoomDetailDto("You cannot book for more than 1o guests");
 		
-		
+	
 	int room = 	bookingDetailsRequestDto.getGuests() /bookingDetailsRequestDto.getRoomsRequired();
+	
+	Optional<Hotel> hotelOptional = hotelDao.findByHotelId(bookingDetailsRequestDto.getHotelId());
+	if(!hotelOptional.isPresent())
+		return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
+	Optional<RoomOptions> roomOptional = roomOptionsDao.findByHotelId(bookingDetailsRequestDto.getHotelId());
+	if(!roomOptional.isPresent())
+		return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
+	Optional<RoomOptions> roomOptions = roomOptionsDao.findByRoomOptionId(roomOptional.get().getRoomOptionId());
+	if(!roomOptions.isPresent())
+		return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
 	if(room> 5)
 	{
-		Optional<Hotel> hotelOptional = hotelDao.findByHotelId(bookingDetailsRequestDto.getHotelId());
-		if(!hotelOptional.isPresent())
-			return roomDetailsDto;
-		Optional<RoomOptions> roomOptional = roomOptionsDao.findByHotelId(bookingDetailsRequestDto.getHotelId());
-		if(!roomOptional.isPresent())
-			return roomDetailsDto;
-		Optional<RoomOptions> roomOptions = roomOptionsDao.findByRoomId(roomOptional.get().getRoomId());
-		if(!roomOptions.isPresent())
-			return roomDetailsDto;
 		Optional<PriceDetails> priceDetails = priceDetailsDao.findByRoomOptionIdAndRoomType(roomOptions.get().getRoomOptionId(), RoomType.VILLA);
 		if(!priceDetails.isPresent())
 			return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
@@ -184,21 +185,12 @@ public class BookingServiceImpl implements BookingService {
 		roomDetailsDto.setRoomType(RoomType.VILLA);
 		roomDetailsDto.setHotelName(hotelOptional.get().getHotelName());
 		roomDetailsDto.setMessage(ApplicationConstants.ROOM_DETAILS);
-		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomId());
+		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomOptionId());
 		return roomDetailsDto;
 		
 	}
 	if(room ==2)
 	{
-		Optional<Hotel> hotelOptional = hotelDao.findByHotelId(bookingDetailsRequestDto.getHotelId());
-		if(!hotelOptional.isPresent())
-			return roomDetailsDto;
-		Optional<RoomOptions> roomOptional = roomOptionsDao.findByHotelId(bookingDetailsRequestDto.getHotelId());
-		if(!roomOptional.isPresent())
-			return roomDetailsDto;
-		Optional<RoomOptions> roomOptions = roomOptionsDao.findByRoomId(roomOptional.get().getRoomId());
-		if(!roomOptions.isPresent())
-			return roomDetailsDto;
 		Optional<PriceDetails> priceDetails = priceDetailsDao.findByRoomOptionIdAndRoomType(roomOptions.get().getRoomOptionId(), RoomType.DOUBLE);
 		if(!priceDetails.isPresent())
 			return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
@@ -207,22 +199,13 @@ public class BookingServiceImpl implements BookingService {
 		roomDetailsDto.setPrice(priceDetails.get().getPrice());
 		roomDetailsDto.setRoomType(RoomType.DOUBLE);
 		roomDetailsDto.setHotelName(hotelOptional.get().getHotelName());
-		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomId());
+		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomOptionId());
 		roomDetailsDto.setMessage(ApplicationConstants.ROOM_DETAILS);
 		return roomDetailsDto;
 		
 	}	
 	if(room ==1)
 	{
-		Optional<Hotel> hotelOptional = hotelDao.findByHotelId(bookingDetailsRequestDto.getHotelId());
-		if(!hotelOptional.isPresent())
-			return roomDetailsDto;
-		Optional<RoomOptions> roomOptional = roomOptionsDao.findByHotelId(bookingDetailsRequestDto.getHotelId());
-		if(!roomOptional.isPresent())
-			return roomDetailsDto;
-		Optional<RoomOptions> roomOptions = roomOptionsDao.findByRoomId(roomOptional.get().getRoomId());
-		if(!roomOptions.isPresent())
-			return roomDetailsDto;
 		Optional<PriceDetails> priceDetails = priceDetailsDao.findByRoomOptionIdAndRoomType(roomOptions.get().getRoomOptionId(), RoomType.SINGLE);
 		if(!priceDetails.isPresent())
 			return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
@@ -231,7 +214,7 @@ public class BookingServiceImpl implements BookingService {
 		roomDetailsDto.setPrice(priceDetails.get().getPrice());
 		roomDetailsDto.setRoomType(RoomType.SINGLE);
 		roomDetailsDto.setHotelName(hotelOptional.get().getHotelName());
-		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomId());
+		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomOptionId());
 		roomDetailsDto.setMessage(ApplicationConstants.ROOM_DETAILS);
 		return roomDetailsDto;
 		
@@ -239,15 +222,6 @@ public class BookingServiceImpl implements BookingService {
 	
 	if(room ==3)
 	{
-		Optional<Hotel> hotelOptional = hotelDao.findByHotelId(bookingDetailsRequestDto.getHotelId());
-		if(!hotelOptional.isPresent())
-			return roomDetailsDto;
-		Optional<RoomOptions> roomOptional = roomOptionsDao.findByHotelId(bookingDetailsRequestDto.getHotelId());
-		if(!roomOptional.isPresent())
-			return roomDetailsDto;
-		Optional<RoomOptions> roomOptions = roomOptionsDao.findByRoomId(roomOptional.get().getRoomId());
-		if(!roomOptions.isPresent())
-			return roomDetailsDto;
 		Optional<PriceDetails> priceDetails = priceDetailsDao.findByRoomOptionIdAndRoomType(roomOptions.get().getRoomOptionId(), RoomType.TRIPLE);
 		if(!priceDetails.isPresent())
 			return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
@@ -256,22 +230,13 @@ public class BookingServiceImpl implements BookingService {
 		roomDetailsDto.setPrice(priceDetails.get().getPrice());
 		roomDetailsDto.setRoomType(RoomType.TRIPLE);
 		roomDetailsDto.setHotelName(hotelOptional.get().getHotelName());
-		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomId());
+		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomOptionId());
 		roomDetailsDto.setMessage(ApplicationConstants.ROOM_DETAILS);
 		return roomDetailsDto;
 		
 	}
 	if(room ==4)
 	{
-		Optional<Hotel> hotelOptional = hotelDao.findByHotelId(bookingDetailsRequestDto.getHotelId());
-		if(!hotelOptional.isPresent())
-			return roomDetailsDto;
-		Optional<RoomOptions> roomOptional = roomOptionsDao.findByHotelId(bookingDetailsRequestDto.getHotelId());
-		if(!roomOptional.isPresent())
-			return roomDetailsDto;
-		Optional<RoomOptions> roomOptions = roomOptionsDao.findByRoomId(roomOptional.get().getRoomId());
-		if(!roomOptions.isPresent())
-			return roomDetailsDto;
 		Optional<PriceDetails> priceDetails = priceDetailsDao.findByRoomOptionIdAndRoomType(roomOptions.get().getRoomOptionId(), RoomType.FAMILY);
 		if(!priceDetails.isPresent())
 			return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
@@ -280,7 +245,7 @@ public class BookingServiceImpl implements BookingService {
 		roomDetailsDto.setPrice(priceDetails.get().getPrice());
 		roomDetailsDto.setRoomType(RoomType.FAMILY);
 		roomDetailsDto.setHotelName(hotelOptional.get().getHotelName());
-		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomId());
+		roomDetailsDto.setRoomOptionId(roomOptional.get().getRoomOptionId());
 		roomDetailsDto.setMessage(ApplicationConstants.ROOM_DETAILS);
 		return roomDetailsDto;
 		

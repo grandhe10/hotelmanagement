@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.demo.hotelmanagement.constants.ApplicationConstants;
 import com.demo.hotelmanagement.dao.BookingDao;
@@ -33,6 +35,8 @@ import com.demo.hotelmanagement.service.BookingService;
 @Service
 public class BookingServiceImpl implements BookingService {
 
+	private static Log logger = LogFactory.getLog(BookingServiceImpl.class);
+	
 	@Autowired
 	UserDao userDao;
 	@Autowired
@@ -45,10 +49,12 @@ public class BookingServiceImpl implements BookingService {
 	RoomOptionsDao roomOptionsDao;
 	@Autowired
 	PriceDetailsDao priceDetailsDao;
-
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	public ResponseDto bookRoom(List<BookingRequestDto> bookingRequestDtoList,String roomType,Long roomOptionId) {
-
+		logger.info("Inside bookRoom method in bookingserviceimpl");
 		ResponseDto responseDto = new ResponseDto();
 
 		List<Boolean> verifyList = bookingRequestDtoList.stream()
@@ -153,10 +159,13 @@ public class BookingServiceImpl implements BookingService {
 		return guestRequestDto;
 
 	}
-
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	public RoomDetailDto getCustomeHotelDetails(BookingDetailsRequestDto bookingDetailsRequestDto) {
 		
+		logger.info("Inside get customer details method in booking serviceimpl");
 		
 		RoomDetailDto roomDetailsDto = new RoomDetailDto();
 		if(bookingDetailsRequestDto.getGuests() >20)

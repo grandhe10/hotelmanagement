@@ -8,6 +8,12 @@ import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Generates User table with userId, userName,password ,location,locationand
+ * contactNumber
+ * 
+ *
+ */
 @Entity
 @Getter
 @Setter

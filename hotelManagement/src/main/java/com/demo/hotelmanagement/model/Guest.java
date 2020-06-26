@@ -7,7 +7,10 @@ import javax.persistence.Id;
 
 import lombok.Getter;
 import lombok.Setter;
-
+/**
+ * Generates Guest table with guestId,
+ * guestName,age,bookingId .
+ */
 @Entity
 @Getter
 @Setter

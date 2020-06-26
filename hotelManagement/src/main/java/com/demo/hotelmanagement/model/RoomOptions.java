@@ -8,7 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 @Entity
 public class RoomOptions {
-	
+	/**
+	* Generates RoomOptions  table with roomOptionId,
+	* roomId,familyRoom ,singleRoom,doubleRoom,tripleRoom,villa,hotelId and availableDate
+	* 
+	*/
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	Long roomOptionId;

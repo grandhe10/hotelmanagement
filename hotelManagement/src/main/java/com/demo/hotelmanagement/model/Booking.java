@@ -10,7 +10,10 @@ import javax.persistence.Id;
 
 import lombok.Getter;
 import lombok.Setter;
-
+/**
+ * Generates Booking table with bookingId,
+ * userId,roomId,date and checkIn,checkOut
+ */
 @Entity
 @Getter
 @Setter

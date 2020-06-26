@@ -171,8 +171,8 @@ public class BookingServiceImpl implements BookingService {
 		RoomDetailDto roomDetailsDto = new RoomDetailDto();
 		if(bookingDetailsRequestDto.getGuests() >20)
 			return new  RoomDetailDto("You cannot book for more than 30 guests");
-		
-	
+		if(bookingDetailsRequestDto.getRoomsRequired()<=0||bookingDetailsRequestDto.getGuests()<=0||bookingDetailsRequestDto.getHotelId()<=0)
+				return new RoomDetailDto("Please enter valid details");
 	int room = 	bookingDetailsRequestDto.getGuests() /bookingDetailsRequestDto.getRoomsRequired();
 	
 	Optional<Hotel> hotelOptional = hotelDao.findByHotelId(bookingDetailsRequestDto.getHotelId());

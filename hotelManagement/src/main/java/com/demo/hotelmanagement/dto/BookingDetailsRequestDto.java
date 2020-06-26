@@ -1,9 +1,18 @@
 package com.demo.hotelmanagement.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="BookingDetailsRequestDto")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BookingDetailsRequestDto {
-	
+	  @NotNull
 	int guests;
+	  @NotNull
 	int roomsRequired;
+	  @NotNull
 	Long hotelId;
 	
 	public int getGuests() {

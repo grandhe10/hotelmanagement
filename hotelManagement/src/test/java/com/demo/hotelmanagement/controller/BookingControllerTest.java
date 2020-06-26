@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,85 +37,82 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @ExtendWith(MockitoExtension.class)
 
 public class BookingControllerTest {
-	
+
 	@Mock
 	BookingService bookingService;
-	
+
 	MockMvc mockMvc;
 	ObjectMapper objectMapper;
-	
+
 	@InjectMocks
 	BookingController bookingController;
-	
+
 	BookingRequestDto bookingRequestDto;
 	List<BookingRequestDto> bookingRequestDtoList;
 	List<GuestRequestDto> guestRequestDtoList;
 	GuestRequestDto guestRequestDto;
 	ResponseDto responseDto;
-	
+
 	@BeforeEach
-	public void setUp()
-	{
+	public void setUp() {
 		objectMapper = new ObjectMapper();
 		mockMvc = MockMvcBuilders.standaloneSetup(bookingController).build();
-	
+
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
-		public void bookRoom() throws Exception { 
+	public void bookRoom() throws Exception {
 		List<BookingRequestDto> bookingRequestDtoList = new ArrayList<>();
-		
+
 		bookingRequestDto = new BookingRequestDto();
 		bookingRequestDto.setCheckIn("09:00:00");
 		bookingRequestDto.setCheckOut("12:00:00");
 		bookingRequestDto.setDate("2020-06-30");
 		bookingRequestDto.setGuestRequestDtoList(guestRequestDtoList);
-		
+
 		GuestRequestDto guestRequestDto = new GuestRequestDto();
 		guestRequestDto.setAge(23);
 		guestRequestDto.setGuestName("suma");
-		
+
 		List<GuestRequestDto> guestRequestDtoList = new ArrayList<>();
-		
+
 		guestRequestDtoList.add(guestRequestDto);
 		bookingRequestDtoList.add(bookingRequestDto);
-		
+
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setMessage("Booking confirmed");
 		responseDto.setStatusCode(201);
 
-	 when(bookingService.bookRoom( any(List.class),  eq("SINGLE"), eq(1L))).thenReturn(responseDto);
-	  
-	  mockMvc.perform(post("/roomOptions/{roomOptionId}/bookings",1L).contentType(
-	  MediaType.APPLICATION_JSON_VALUE) .param("roomType","SINGLE")
-	  .content(objectMapper.writeValueAsString(bookingRequestDtoList)))
-	  .andExpect(status().isOk()) 
-	  .andExpect(jsonPath("$", Matchers.any(LinkedHashMap.class)));
-	  verify(bookingService).bookRoom(any(List.class),  eq("SINGLE"), eq(1L)); }
-}
+		when(bookingService.bookRoom(any(List.class), eq("SINGLE"), eq(1L))).thenReturn(responseDto);
 
-/*
- * @Test public void getCustomHotelDetails() throws Exception {
- * BookingDetailsRequestDto bookingDetailsRequestDto = new
- * BookingDetailsRequestDto(); bookingDetailsRequestDto.setGuests(20);
- * bookingDetailsRequestDto.setHotelId(1L);
- * bookingDetailsRequestDto.setRoomsRequired(5); RoomDetailDto roomDetailDto =
- * new RoomDetailDto(); roomDetailDto.setAvailable(200);
- * roomDetailDto.setHotelName("testHotelName");
- * roomDetailDto.setMessage("Please find details here");
- * roomDetailDto.setPrice(2000); roomDetailDto.setRoomOptionId(1L);
- * roomDetailDto.setRoomType(RoomType.VILLA);
- * 
- * when(bookingService.getCustomeHotelDetails(any(BookingDetailsRequestDto.class
- * ))).thenReturn(any(RoomDetailDto.class));
- * 
- * mockMvc.perform(post("/hotels").contentType(
- * MediaType.APPLICATION_JSON_VALUE) .param("roomType","SINGLE")
- * .content(objectMapper.writeValueAsString(bookingDetailsRequestDto)))
- * .andExpect(status().isNotFound()) .andExpect(jsonPath("$",
- * Matchers.any(RoomDetailDto.class)));
- * verify(bookingService).getCustomeHotelDetails(any(BookingDetailsRequestDto.
- * class)); } }
- */
-	
-	
+		mockMvc.perform(post("/roomOptions/{roomOptionId}/bookings", 1L).contentType(MediaType.APPLICATION_JSON_VALUE)
+				.param("roomType", "SINGLE").content(objectMapper.writeValueAsString(bookingRequestDtoList)))
+				.andExpect(status().isOk()).andExpect(jsonPath("$", Matchers.any(LinkedHashMap.class)));
+		verify(bookingService).bookRoom(any(List.class), eq("SINGLE"), eq(1L));
+	}
+
+	/*
+	 * @Test public void getCustomHotelDetails() throws Exception {
+	 * BookingDetailsRequestDto bookingDetailsRequestDto = new
+	 * BookingDetailsRequestDto(); bookingDetailsRequestDto.setGuests(20);
+	 * bookingDetailsRequestDto.setHotelId(1L);
+	 * bookingDetailsRequestDto.setRoomsRequired(5); RoomDetailDto roomDetailDto =
+	 * new RoomDetailDto(); roomDetailDto.setAvailable(200);
+	 * roomDetailDto.setHotelName("testHotelName");
+	 * roomDetailDto.setMessage("Please find details here");
+	 * roomDetailDto.setPrice(2000); roomDetailDto.setRoomOptionId(1L);
+	 * roomDetailDto.setRoomType(RoomType.VILLA);
+	 * 
+	 * when(bookingService.getCustomeHotelDetails(eq(bookingDetailsRequestDto)))
+	 * .thenReturn((roomDetailDto));
+	 * bookingService.getCustomeHotelDetails(bookingDetailsRequestDto);
+	 * mockMvc.perform(post("/hotels").contentType(MediaType.APPLICATION_JSON_VALUE)
+	 * .param("roomType", "SINGLE")
+	 * .content(objectMapper.writeValueAsString(bookingDetailsRequestDto))).
+	 * andExpect(status().isNotFound())
+	 * .andExpect(content().string(objectMapper.writeValueAsString(roomDetailDto)));
+	 * verify(bookingService).getCustomeHotelDetails(any(BookingDetailsRequestDto.
+	 * class)); }
+	 */
+}

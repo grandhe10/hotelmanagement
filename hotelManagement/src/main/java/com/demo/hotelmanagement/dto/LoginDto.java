@@ -2,7 +2,11 @@ package com.demo.hotelmanagement.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+@XmlRootElement(name="LoginDto")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class LoginDto {
 	 @NotNull
 	    @Size(min=3,message="required")

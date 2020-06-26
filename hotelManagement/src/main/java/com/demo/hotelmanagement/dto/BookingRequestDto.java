@@ -2,6 +2,8 @@ package com.demo.hotelmanagement.dto;
 
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class BookingRequestDto {
 	
 	public BookingRequestDto() {
@@ -16,6 +18,7 @@ public class BookingRequestDto {
 	String checkOut;
 	List<GuestRequestDto> guestRequestDtoList;
 	String message;
+	@DateTimeFormat(pattern="yyyy-mm-dd")
 	String date;
 	public Long getUserId() {
 		return userId;

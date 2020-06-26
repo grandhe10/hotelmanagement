@@ -24,7 +24,9 @@ public class HotelServiceImpl implements HotelService {
 
 	@Autowired
 	RoomOptionsDao roomOptionsDao;
-
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	public HotelResponseDto getHotelsByLocation(String location, String availableDate) {
 		HotelResponseDto hotelResponseDto = new HotelResponseDto();
@@ -67,6 +69,7 @@ public class HotelServiceImpl implements HotelService {
 		hotelDetailsDto.setTripleRoom(roomOptions.get().getTripleRoom());
 		hotelDetailsDto.setVilla(roomOptions.get().getVilla());
 		hotelDetailsDto.setHotelId(hotel1.get().getHotelId());
+		hotelDetailsDto.setLocation(hotel1.get().getLocation());
 		return hotelDetailsDto;
 
 	}

@@ -1,11 +1,17 @@
 package com.demo.hotelmanagement.model;
 
 import javax.persistence.Entity;
+
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+/**
+* Generates PriceDetails  table with priceDetailsId,
+* roomType,price and roomOptionId
+*/
 @Entity
 public class PriceDetails {
 	

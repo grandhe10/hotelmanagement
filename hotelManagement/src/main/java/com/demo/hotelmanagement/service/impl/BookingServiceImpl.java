@@ -70,7 +70,7 @@ public class BookingServiceImpl implements BookingService {
 
 		bookingRequestDtoList.stream().map(bookingRequestDto -> addBookingRequestDto(bookingRequestDto,roomType,roomOptionId))
 				.collect(Collectors.toList());
-
+		
 		responseDto.setMessage("Booking confirmed");
 		responseDto.setStatusCode(HttpStatus.CREATED.value());
 
@@ -87,6 +87,7 @@ public class BookingServiceImpl implements BookingService {
 
 	}
 
+	
 	private BookingRequestDto addBookingRequestDto(BookingRequestDto bookingRequestDto,String roomType,Long roomOptionId) {
 		
 
@@ -169,7 +170,7 @@ public class BookingServiceImpl implements BookingService {
 		
 		RoomDetailDto roomDetailsDto = new RoomDetailDto();
 		if(bookingDetailsRequestDto.getGuests() >20)
-			return new  RoomDetailDto("You cannot book for more than 1o guests");
+			return new  RoomDetailDto("You cannot book for more than 30 guests");
 		
 	
 	int room = 	bookingDetailsRequestDto.getGuests() /bookingDetailsRequestDto.getRoomsRequired();
@@ -183,7 +184,7 @@ public class BookingServiceImpl implements BookingService {
 	Optional<RoomOptions> roomOptions = roomOptionsDao.findByRoomOptionId(roomOptional.get().getRoomOptionId());
 	if(!roomOptions.isPresent())
 		return new RoomDetailDto(ApplicationConstants.ROOM_UNAVAILABLE);
-	if(room> 5)
+	if(room>= 5)
 	{
 		Optional<PriceDetails> priceDetails = priceDetailsDao.findByRoomOptionIdAndRoomType(roomOptions.get().getRoomOptionId(), RoomType.VILLA);
 		if(!priceDetails.isPresent())

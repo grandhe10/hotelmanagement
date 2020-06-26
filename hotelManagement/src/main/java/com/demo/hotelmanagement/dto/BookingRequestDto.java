@@ -2,9 +2,6 @@ package com.demo.hotelmanagement.dto;
 
 import java.util.List;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class BookingRequestDto {

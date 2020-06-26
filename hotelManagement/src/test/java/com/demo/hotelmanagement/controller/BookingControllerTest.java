@@ -5,7 +5,6 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,12 +23,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.demo.hotelmanagement.dto.BookingDetailsRequestDto;
 import com.demo.hotelmanagement.dto.BookingRequestDto;
 import com.demo.hotelmanagement.dto.GuestRequestDto;
 import com.demo.hotelmanagement.dto.ResponseDto;
-import com.demo.hotelmanagement.dto.RoomDetailDto;
-import com.demo.hotelmanagement.model.RoomType;
 import com.demo.hotelmanagement.service.BookingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

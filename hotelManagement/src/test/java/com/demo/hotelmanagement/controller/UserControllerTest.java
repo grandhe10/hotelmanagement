@@ -6,8 +6,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import org.hamcrest.Matchers;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +20,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.demo.hotelmanagement.dto.LoginDto;
 import com.demo.hotelmanagement.dto.UserDto;
-import com.demo.hotelmanagement.model.User;
 import com.demo.hotelmanagement.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

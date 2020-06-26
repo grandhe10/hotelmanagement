@@ -18,9 +18,6 @@ import com.demo.hotelmanagement.exception.ResourceNotFoundException;
 import com.demo.hotelmanagement.service.UserService;
 
  
-
- 
-
 @RestController
 public class UserController {
 	private static Log logger = LogFactory.getLog(UserController.class);
